@@ -2,8 +2,26 @@
   package="io.crossingthestreams.flutterappauth"
   xmlns:tools="http://schemas.android.com/tools">
   <application>
-    <activity android:name="net.openid.appauth.RedirectUriReceiverActivity"
-      android:theme="@style/Theme.AppCompat.Translucent.NoTitleBar"
-      tools:replace="android:theme" />
+    <activity
+        android:name="net.openid.appauth.AuthorizationManagementActivity"
+        android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"
+        android:exported="false"
+        android:launchMode="singleInstance"
+        android:theme="@style/Theme.AppCompat.Translucent.NoTitleBar"
+        tools:node="replace"/>
+    <activity
+        android:name="net.openid.appauth.RedirectUriReceiverActivity"
+        android:exported="true"
+        android:theme="@style/Theme.AppCompat.Translucent.NoTitleBar"
+        tools:node="replace">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data android:scheme="${appAuthRedirectScheme}" />
+      </intent-filter>
+    </activity>
   </application>
 </manifest>
